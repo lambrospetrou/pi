@@ -6,9 +6,10 @@ SCRIPTPATH=`dirname "$SCRIPT"`
 USER=$( echo "$SCRIPTPATH" | sed 's/\/home\/\([^\/]\+\).*/\1/' )
 echo "User: $USER"
 
-# Enable the following 2 lines if you will run this through crontab to properly setup the PATH
-. /home/$USER/.profile 
-. /home/$USER/.bashrc
+# Enable the following lines if you will run this through crontab to properly setup the PATH
+if [ -f /home/$USER/.profile ]; then source /home/$USER/.profile ; fi
+if [ -f /home/$USER/.bashrc ]; then source /home/$USER/.bashrc ; fi
+if [ -f /home/$USER/.zshrc ]; then source /home/$USER/.zshrc ; fi
 
 # The actual script that updates the AWS Route 53 Record set is below
 set -ex
